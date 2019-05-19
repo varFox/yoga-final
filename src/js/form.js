@@ -1,9 +1,9 @@
 function form() {
   let message = {
     loading: 'Загрузка...',
-    loadingImg: 'img/ajax-loader.gif',
+    loadingImg: '/dist/img/ajax-loader.gif',
     success: 'Спасибо! Скоро мы с вами свяжемся',
-    successImg: 'img/smartphone.png',
+    successImg: '/dist/img/smartphone.png',
     failure: 'Что-то пошло не так...'
   };
 
@@ -18,8 +18,8 @@ function form() {
       statusFormP = document.createElement('p');
       statusMessage.classList.add('status-message');
 
-  statusFormImg.style.cssText = 'height: 100px; margin: 10px auto; display: block;';
-  statusMessage.style.cssText = 'width: 100%; text-align: center; color: white';
+  statusFormImg.classList.add('sFormImg');
+  statusMessage.classList.add('sMessage');
 
   function sendForm(elem, popap) {
     elem.addEventListener('submit', (event) => {

@@ -717,3 +717,13 @@ footer .social .social-block a img {
   -webkit-box-shadow: 0 0 10px #c78030;
   box-shadow: 0 0 10px #c78030;
 }
+.sFormImg {
+  height: 100px;
+  margin: 10px auto;
+  display: block;
+}
+.sMessage {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+}

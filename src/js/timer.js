@@ -1,12 +1,10 @@
-function timer(dline) {
+function timer(deadline) {
   function zero(a) {
     if (a < 10) {
       a = '0' + a;
     }
     return a;
   }
-
-  let deadline = dline; //'2019-10-21'
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
