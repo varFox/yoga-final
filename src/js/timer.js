@@ -24,21 +24,20 @@ const timer = (deadline) => {
       hours = timer.querySelector('.hours'),
       minutes = timer.querySelector('.minutes'),
       seconds = timer.querySelector('.seconds'),
-      timeIntervar = setInterval(updateClock, 1000);
+      timeIntervar = setInterval(() => {
+        let t = getTimeRemaining(endtime);
+        hours.textContent = zero(t.hours);
+        minutes.textContent = zero(t.minutes);
+        seconds.textContent = zero(t.seconds);
+        if (t.total <= 0) {
+          clearInterval(timeIntervar);
+          hours.textContent = '00';
+          minutes.textContent = '00';
+          seconds.textContent = '00';
+        }
+      }, 1000);
 
-      const updateClock = () => {
-      let t = getTimeRemaining(endtime);
-      hours.textContent = zero(t.hours);
-      minutes.textContent = zero(t.minutes);
-      seconds.textContent = zero(t.seconds);
 
-      if (t.total <= 0) {
-        clearInterval(timeIntervar);
-        hours.textContent = '00';
-        minutes.textContent = '00';
-        seconds.textContent = '00';
-      }
-    }
   }
 
   setClock('timer', deadline);
