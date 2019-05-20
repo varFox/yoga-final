@@ -12280,69 +12280,62 @@ module.exports = g;
 /***/ (function(module, exports) {
 
 function calc() {
-  var persons = document.querySelectorAll('.counter-block-input')[0],
-      restDays = document.querySelectorAll('.counter-block-input')[1],
+  var inputs = document.querySelectorAll('.counter-block-input'),
       place = document.getElementById('select'),
-      totalValue = document.getElementById('total'),
-      personsSum = 0,
-      daysSum = 0,
-      total = 0;
-  totalValue.innerHTML = '0';
-  place.addEventListener('change', function () {
-    if (persons.value == '' || restDays.value == '' || persons.value == '0' || restDays.value == '0') {
-      totalValue.innerHTML = 0;
-    } else {
-      var a = total * place.value - 500;
-      if (a < 0) a = 0;
-      var printNum = setInterval(function () {
-        if (a < total * place.value) {
-          a += 5;
-          totalValue.innerHTML = a;
-        } else {
-          clearInterval(printNum);
-        }
-      }, 5);
-    }
-  });
-  persons.addEventListener('keydown', function (e) {
-    inputCalc(this, e);
-  });
-  restDays.addEventListener('keydown', function (e) {
-    inputCalc(this, e);
-  });
+      totalValue = document.getElementById('total');
+  totalValue.textContent = '0';
 
-  function inputCalc(input, e) {
+  function validCalc(input, e) {
     e.preventDefault();
 
     if (e.key.match(/[0-9]/) && input.value.length < 3) {
-      if (input.value.length == 0 && e.key.match(/[0]/)) {
-        input.value = '';
+      if (input.value.length == 0 && e.key.match(/[0]/)) input.value = '';else input.value += e.key;
+    } else if (e.key == 'Backspace') input.value = '';
+  }
+
+  function calcInput() {
+    var sum = 0;
+
+    for (var i = 0; i < inputs.length; i++) {
+      if (+inputs[i].value > 0) {
+        sum += +inputs[i].value;
       } else {
-        input.value += e.key;
+        sum = 0;
+        break;
       }
-    } else if (e.key == 'Backspace') {
-      input.value = '';
     }
 
-    daysSum = +input.value;
-    total = (daysSum + personsSum) * 4000;
+    sum = sum * 4000 * place.value;
 
-    if (persons.value == '' || restDays.value == '' || persons.value == '0' || restDays.value == '0') {
-      totalValue.innerHTML = '0';
-    } else {
-      var a = total * place.value - 500;
-      if (a < 0) a = 0; // хотите красивое увеличение стоимости вашей поездки?
+    if (sum > 0) {
+      var a = sum - 500;
 
-      var printNum = setInterval(function () {
-        if (a < total * place.value) {
-          a += 5;
-          totalValue.innerHTML = a;
-        } else {
-          clearInterval(printNum);
-        }
-      }, 5);
+      if (a > 0) {
+        var printNum = setInterval(function () {
+          if (a < sum) {
+            a += 5;
+            totalValue.textContent = a;
+          } else {
+            clearInterval(printNum);
+          }
+        }, 5);
+      } else {
+        totalValue.textContent = '0';
+      }
     }
   }
+
+  inputs.forEach(function (input) {
+    input.addEventListener('keydown', function (event) {
+      validCalc(input, event);
+    });
+    input.addEventListener('blur', function () {
+      calcInput();
+    });
+  });
+  place.addEventListener('change', function () {
+    calcInput();
+  });
 }
 
 module.exports = calc;
@@ -12369,9 +12362,9 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 function form() {
   var message = {
     loading: 'Загрузка...',
-    loadingImg: '/dist/img/ajax-loader.gif',
+    loadingImg: 'dist/img/ajax-loader.gif',
     success: 'Спасибо! Скоро мы с вами свяжемся',
-    successImg: '/dist/img/smartphone.png',
+    successImg: 'dist/img/smartphone.png',
     failure: 'Что-то пошло не так...'
   };
   var mainForm = document.querySelector('.main-form'),
@@ -12448,10 +12441,8 @@ function form() {
 
       function clearInput() {
         for (var i = 0; i < input.length; i++) {
-          input[i].value = '';
+          if (input[i].classList.contains('tel-number')) input[i].value = '+7(';else input[i].value = '';
         }
-
-        document.querySelector('.popup-form__input').value = '+7(';
       }
 
       postData(formData).then(function () {

@@ -1,9 +1,9 @@
 function form() {
   let message = {
     loading: 'Загрузка...',
-    loadingImg: '/dist/img/ajax-loader.gif',
+    loadingImg: 'dist/img/ajax-loader.gif',
     success: 'Спасибо! Скоро мы с вами свяжемся',
-    successImg: '/dist/img/smartphone.png',
+    successImg: 'dist/img/smartphone.png',
     failure: 'Что-то пошло не так...'
   };
 
@@ -62,9 +62,9 @@ function form() {
 
       function clearInput() {
         for (let i = 0; i < input.length; i++) {
-          input[i].value = '';
+          if (input[i].classList.contains('tel-number')) input[i].value = '+7('
+          else input[i].value = '';
         }
-        document.querySelector('.popup-form__input').value = '+7(';
       }
       postData(formData)
         .then(() => {
