@@ -1,4 +1,4 @@
-function form() {
+const form = () => {
   let message = {
     loading: 'Загрузка...',
     loadingImg: 'dist/img/ajax-loader.gif',
@@ -21,7 +21,7 @@ function form() {
   statusFormImg.classList.add('sFormImg');
   statusMessage.classList.add('sMessage');
 
-  function sendForm(elem, popap) {
+  const sendForm = (elem, popap) => {
     elem.addEventListener('submit', (event) => {
       event.preventDefault();
       popap.appendChild(statusMessage);
@@ -30,7 +30,7 @@ function form() {
       
       let formData = new FormData(elem);
 
-      function postData(data) {
+      const postData = (data) => {
         return new Promise(function (resolve, reject) {
           let request = new XMLHttpRequest();
           request.open('POST', 'server.php');
@@ -60,7 +60,7 @@ function form() {
         });
       }
 
-      function clearInput() {
+      const clearInput = () => {
         for (let i = 0; i < input.length; i++) {
           if (input[i].classList.contains('tel-number')) input[i].value = '+7('
           else input[i].value = '';

@@ -1,9 +1,9 @@
-function tabs(iht, ih, it) {
+const tabs = (iht, ih, it) => {
   let tab = document.querySelectorAll('.' + iht), // '.info-header-tab'
       info = document.querySelector('.' + ih), // '.info-header'
       tabContent = document.querySelectorAll('.' + it); // '.info-tabcontent'
 
-  function hideTabContent(a) {
+      const hideTabContent = (a) => {
     for (let i = a; i < tabContent.length; i++) {
       tabContent[i].classList.remove('show');
       tabContent[i].classList.add('hide');
@@ -12,7 +12,7 @@ function tabs(iht, ih, it) {
 
   hideTabContent(1);
 
-  function showTabContent(b) {
+  const showTabContent = (b) => {
     if (tabContent[b].classList.contains('hide')) {
       tabContent[b].classList.remove('hide');
       tabContent[b].classList.add('show');

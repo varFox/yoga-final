@@ -12279,21 +12279,21 @@ module.exports = g;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function calc() {
+var calc = function calc() {
   var inputs = document.querySelectorAll('.counter-block-input'),
       place = document.getElementById('select'),
       totalValue = document.getElementById('total');
   totalValue.textContent = '0';
 
-  function validCalc(input, e) {
+  var validCalc = function validCalc(input, e) {
     e.preventDefault();
 
     if (e.key.match(/[0-9]/) && input.value.length < 3) {
       if (input.value.length == 0 && e.key.match(/[0]/)) input.value = '';else input.value += e.key;
     } else if (e.key == 'Backspace') input.value = '';
-  }
+  };
 
-  function calcInput() {
+  var calcInput = function calcInput() {
     var sum = 0;
 
     for (var i = 0; i < inputs.length; i++) {
@@ -12323,7 +12323,7 @@ function calc() {
         totalValue.textContent = '0';
       }
     }
-  }
+  };
 
   inputs.forEach(function (input) {
     input.addEventListener('keydown', function (event) {
@@ -12336,7 +12336,7 @@ function calc() {
   place.addEventListener('change', function () {
     calcInput();
   });
-}
+};
 
 module.exports = calc;
 
@@ -12359,7 +12359,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").Promise : Promise;
 
-function form() {
+var form = function form() {
   var message = {
     loading: 'Загрузка...',
     loadingImg: 'dist/img/ajax-loader.gif',
@@ -12379,7 +12379,7 @@ function form() {
   statusFormImg.classList.add('sFormImg');
   statusMessage.classList.add('sMessage');
 
-  function sendForm(elem, popap) {
+  var sendForm = function sendForm(elem, popap) {
     elem.addEventListener('submit', function (event) {
       event.preventDefault();
       popap.appendChild(statusMessage);
@@ -12387,7 +12387,7 @@ function form() {
       statusMessage.appendChild(statusFormP);
       var formData = new FormData(elem);
 
-      function postData(data) {
+      var postData = function postData(data) {
         return new _Promise(function (resolve, reject) {
           var request = new XMLHttpRequest();
           request.open('POST', 'server.php');
@@ -12437,13 +12437,13 @@ function form() {
 
           request.send(JSON.stringify(jsonObject));
         });
-      }
+      };
 
-      function clearInput() {
+      var clearInput = function clearInput() {
         for (var i = 0; i < input.length; i++) {
           if (input[i].classList.contains('tel-number')) input[i].value = '+7(';else input[i].value = '';
         }
-      }
+      };
 
       postData(formData).then(function () {
         statusFormImg.src = message.loadingImg;
@@ -12455,11 +12455,11 @@ function form() {
         return statusFormP.textContent = message.failures;
       }).then(clearInput);
     });
-  }
+  };
 
   sendForm(form, contactForm);
   sendForm(mainForm, popapForm);
-}
+};
 
 module.exports = form;
 
@@ -12472,17 +12472,17 @@ module.exports = form;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {
+var modal = function modal() {
   var overlay = document.querySelector('.overlay');
   popup = document.querySelector('.popup');
 
-  function isMobile() {
+  var isMobile = function isMobile() {
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
       return true;
     }
 
     return false;
-  }
+  };
 
   var bindModal = function bindModal(overlayStatus, overflowStatus, classListMethod) {
     if (classListMethod == 'remove') {
@@ -12509,7 +12509,7 @@ function modal() {
     if (target.classList.contains('more') || target.classList.contains('description-btn')) bindModal('block', 'hidden', 'add');
     if (target.classList.contains('popup-close')) bindModal('', '', 'remove');
   });
-}
+};
 
 module.exports = modal;
 
@@ -12559,7 +12559,7 @@ window.addEventListener('DOMContentLoaded', function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function scroll() {
+var scroll = function scroll() {
   var goTo = document.querySelectorAll('.container ul li a');
   goTo.forEach(function (item) {
     item.addEventListener('click', function (event) {
@@ -12571,7 +12571,7 @@ function scroll() {
       });
     });
   });
-}
+};
 
 module.exports = scroll;
 
@@ -12584,7 +12584,7 @@ module.exports = scroll;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function slider() {
+var slider = function slider() {
   var slideIndex = 1,
       slides = document.querySelectorAll('.slider-item'),
       prev = document.querySelector('.prev'),
@@ -12592,7 +12592,7 @@ function slider() {
       dotsWrap = document.querySelector('.slider-dots'),
       dots = document.querySelectorAll('.dot');
 
-  function showSlides(n) {
+  var showSlides = function showSlides(n) {
     if (n > slides.length) {
       slideIndex = 1;
     }
@@ -12612,17 +12612,17 @@ function slider() {
     dots[slideIndex - 1].classList.add('dot-active');
     slides[slideIndex - 1].classList.add('my-fade');
     slides[slideIndex - 1].style.display = '';
-  }
+  };
 
   showSlides(slideIndex);
 
-  function plusSlides(n) {
+  var plusSlides = function plusSlides(n) {
     showSlides(slideIndex += n);
-  }
+  };
 
-  function currentSlide(n) {
+  var currentSlide = function currentSlide(n) {
     showSlides(slideIndex = n);
-  }
+  };
 
   prev.addEventListener('click', function () {
     plusSlides(-1);
@@ -12637,7 +12637,7 @@ function slider() {
       }
     }
   });
-}
+};
 
 module.exports = slider;
 
@@ -12650,28 +12650,28 @@ module.exports = slider;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function tabs(iht, ih, it) {
+var tabs = function tabs(iht, ih, it) {
   var tab = document.querySelectorAll('.' + iht),
       // '.info-header-tab'
   info = document.querySelector('.' + ih),
       // '.info-header'
   tabContent = document.querySelectorAll('.' + it); // '.info-tabcontent'
 
-  function hideTabContent(a) {
+  var hideTabContent = function hideTabContent(a) {
     for (var i = a; i < tabContent.length; i++) {
       tabContent[i].classList.remove('show');
       tabContent[i].classList.add('hide');
     }
-  }
+  };
 
   hideTabContent(1);
 
-  function showTabContent(b) {
+  var showTabContent = function showTabContent(b) {
     if (tabContent[b].classList.contains('hide')) {
       tabContent[b].classList.remove('hide');
       tabContent[b].classList.add('show');
     }
-  }
+  };
 
   info.addEventListener('click', function (event) {
     var target = event.target;
@@ -12686,7 +12686,7 @@ function tabs(iht, ih, it) {
       }
     }
   });
-}
+};
 
 module.exports = tabs;
 
@@ -12699,16 +12699,16 @@ module.exports = tabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function timer(deadline) {
-  function zero(a) {
+var timer = function timer(deadline) {
+  var zero = function zero(a) {
     if (a < 10) {
       a = '0' + a;
     }
 
     return a;
-  }
+  };
 
-  function getTimeRemaining(endtime) {
+  var getTimeRemaining = function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date()),
         hs = Math.floor(t / (1000 * 60 * 60)),
         ms = Math.floor(t / 1000 / 60 % 60),
@@ -12719,16 +12719,16 @@ function timer(deadline) {
       'minutes': ms,
       'seconds': ss
     };
-  }
+  };
 
-  function setClock(id, endtime) {
+  var setClock = function setClock(id, endtime) {
     var timer = document.getElementById(id),
         hours = timer.querySelector('.hours'),
         minutes = timer.querySelector('.minutes'),
         seconds = timer.querySelector('.seconds'),
         timeIntervar = setInterval(updateClock, 1000);
 
-    function updateClock() {
+    var updateClock = function updateClock() {
       var t = getTimeRemaining(endtime);
       hours.textContent = zero(t.hours);
       minutes.textContent = zero(t.minutes);
@@ -12740,11 +12740,11 @@ function timer(deadline) {
         minutes.textContent = '00';
         seconds.textContent = '00';
       }
-    }
-  }
+    };
+  };
 
   setClock('timer', deadline);
-}
+};
 
 module.exports = timer;
 
@@ -12757,7 +12757,7 @@ module.exports = timer;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function valid() {
+var valid = function valid() {
   var number = document.querySelectorAll('.tel-number');
   var pos = 0;
   number.forEach(function (item) {
@@ -12778,7 +12778,7 @@ function valid() {
     });
   });
 
-  function validNumber(e, input, pos) {
+  var validNumber = function validNumber(e, input, pos) {
     pos = input.value.length;
     e.preventDefault();
 
@@ -12809,8 +12809,8 @@ function valid() {
     }
 
     return pos;
-  }
-}
+  };
+};
 
 module.exports = valid;
 

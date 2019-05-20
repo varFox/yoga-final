@@ -1,9 +1,9 @@
-function modal() {
+const modal = () => {
   let overlay = document.querySelector('.overlay');
-      popup = document.querySelector('.popup');
+  popup = document.querySelector('.popup');
 
 
-  function isMobile() {
+  const isMobile = () => {
     if (navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i)) {
       return true;
     }

@@ -1,4 +1,4 @@
-function slider() {
+const slider = () => {
   let slideIndex = 1,
       slides = document.querySelectorAll('.slider-item'),
       prev = document.querySelector('.prev'),
@@ -6,7 +6,7 @@ function slider() {
       dotsWrap = document.querySelector('.slider-dots'),
       dots = document.querySelectorAll('.dot');
 
-  function showSlides(n) {
+      const showSlides = (n) => {
     if (n > slides.length) {
       slideIndex = 1;
     }
@@ -28,11 +28,11 @@ function slider() {
   showSlides(slideIndex);
 
 
-  function plusSlides(n) {
+  const plusSlides = (n) => {
     showSlides(slideIndex += n);
   }
 
-  function currentSlide(n) {
+  const currentSlide = (n) => {
     showSlides(slideIndex = n);
   }
 

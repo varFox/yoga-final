@@ -1,11 +1,11 @@
-function calc() {
+const calc = () => {
 
   let inputs = document.querySelectorAll('.counter-block-input'),
       place = document.getElementById('select'),
       totalValue = document.getElementById('total');
   totalValue.textContent = '0';
 
-  function validCalc(input, e) {
+  const validCalc = (input, e) => {
     e.preventDefault();
     if (e.key.match(/[0-9]/) && input.value.length < 3) {
       if (input.value.length == 0 && e.key.match(/[0]/)) input.value = ''
@@ -13,7 +13,7 @@ function calc() {
     } else if (e.key == 'Backspace') input.value = '';
   }
 
-  function calcInput() {
+  const calcInput = () => {
     let sum = 0;
     for (let i = 0; i < inputs.length; i++) {
       if (+inputs[i].value > 0) {

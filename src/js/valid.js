@@ -1,4 +1,4 @@
-function valid() {
+const valid = () => {
   const number = document.querySelectorAll('.tel-number');
   let pos = 0;
   
@@ -20,7 +20,7 @@ function valid() {
     });
   });
 
-  function validNumber(e, input, pos) {
+  const validNumber = (e, input, pos) => {
     pos = input.value.length;
     e.preventDefault();
     if (e.key.match(/[0-9]/) && pos < 16 && (pos == '13' || pos == '10')) {
