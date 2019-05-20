@@ -12376,7 +12376,7 @@ function form() {
   };
   var mainForm = document.querySelector('.main-form'),
       form = document.querySelector('#form'),
-      input = form.getElementsByTagName('input'),
+      input = document.getElementsByTagName('input'),
       popapForm = document.querySelector('.popup-form'),
       contactForm = document.querySelector('.contact-form'),
       statusMessage = document.createElement('div'),
@@ -12767,15 +12767,24 @@ module.exports = timer;
 /***/ (function(module, exports) {
 
 function valid() {
-  var number = document.querySelector('.popup-form__input'),
-      telNumber = document.querySelectorAll('#form input')[1];
-  var pos = 0,
-      telPos = telNumber.value.length;
-  number.addEventListener('keydown', function (e) {
-    validNumber(e, number, pos);
-  });
-  telNumber.addEventListener('keydown', function (e) {
-    validNumber(e, telNumber, telPos);
+  var number = document.querySelectorAll('.tel-number');
+  var pos = 0;
+  number.forEach(function (item) {
+    item.addEventListener('keydown', function (e) {
+      validNumber(e, item, pos);
+    });
+    item.addEventListener('focus', function () {
+      if (pos == 0) {
+        item.value = '+7(';
+        pos = 3;
+      }
+    });
+    item.addEventListener('blur', function () {
+      if (item.value.slice(-1) == '(') {
+        item.value = '';
+        pos = 0;
+      }
+    });
   });
 
   function validNumber(e, input, pos) {
@@ -12810,31 +12819,6 @@ function valid() {
 
     return pos;
   }
-
-  number.addEventListener('focus', function () {
-    if (pos == 0) {
-      number.value = '+7(';
-      pos = 3;
-    }
-  });
-  number.addEventListener('blur', function () {
-    if (number.value.slice(-1) == '(') {
-      number.value = '';
-      pos = 0;
-    }
-  });
-  telNumber.addEventListener('focus', function () {
-    if (telPos == 0) {
-      telNumber.value = '+7(';
-      telPos = 3;
-    }
-  });
-  telNumber.addEventListener('blur', function () {
-    if (telNumber.value.slice(-1) == '(') {
-      telNumber.value = '';
-      telPos = 0;
-    }
-  });
 }
 
 module.exports = valid;

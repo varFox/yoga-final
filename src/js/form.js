@@ -9,7 +9,7 @@ function form() {
 
   let mainForm = document.querySelector('.main-form'),
       form = document.querySelector('#form'),
-      input = form.getElementsByTagName('input'),
+      input = document.getElementsByTagName('input'),
       popapForm = document.querySelector('.popup-form'),
       contactForm = document.querySelector('.contact-form'),
       

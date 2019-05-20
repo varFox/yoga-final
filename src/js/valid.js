@@ -1,15 +1,23 @@
 function valid() {
-  const number = document.querySelector('.popup-form__input'),
-        telNumber = document.querySelectorAll('#form input')[1];
-  let pos = 0,
-      telPos = telNumber.value.length;
-
-  number.addEventListener('keydown', (e) => {
-    validNumber(e, number, pos);
-  });
-
-  telNumber.addEventListener('keydown', (e) => {
-    validNumber(e, telNumber, telPos);
+  const number = document.querySelectorAll('.tel-number');
+  let pos = 0;
+  
+  number.forEach(item => {
+    item.addEventListener('keydown', (e) => {
+      validNumber(e, item, pos);
+    });
+    item.addEventListener('focus', () => {
+      if (pos == 0) {
+        item.value = '+7(';
+        pos = 3;
+      }
+    });
+    item.addEventListener('blur', () => {
+      if (item.value.slice(-1) == '(') {
+        item.value = '';
+        pos = 0;
+      }
+    });
   });
 
   function validNumber(e, input, pos) {
@@ -39,30 +47,6 @@ function valid() {
     }
     return pos;
   }
-  number.addEventListener('focus', () => {
-    if (pos == 0) {
-      number.value = '+7(';
-      pos = 3;
-    }
-  });
-  number.addEventListener('blur', () => {
-    if (number.value.slice(-1) == '(') {
-      number.value = '';
-      pos = 0;
-    }
-  });
-  telNumber.addEventListener('focus', () => {
-    if (telPos == 0) {
-      telNumber.value = '+7(';
-      telPos = 3;
-    }
-  });
-  telNumber.addEventListener('blur', () => {
-    if (telNumber.value.slice(-1) == '(') {
-      telNumber.value = '';
-      telPos = 0;
-    }
-  });
 }
 
 module.exports = valid;
